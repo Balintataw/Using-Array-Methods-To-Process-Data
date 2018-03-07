@@ -7,29 +7,30 @@ function avgPrice(arr) {
 document.getElementById('answer1').innerHTML = `The average price is ${avgPrice(items).toFixed(2)}`
 
 //answer 2
+
 function costRange(arr) {
     return arr.filter(item => {
         if (item.price > 14 && item.price < 18) {
             return item
         }
     }).map(elem => elem.title)
-    
 }
 
-var htmlStr = ''
+var htmlStr2 = ''
 costRange(items).forEach((item, i) => 
-    htmlStr += `${item}\n`
+    htmlStr2 += `${item}\n`
 )
-document.getElementById('answer2').innerHTML = htmlStr
+document.getElementById('answer2').innerHTML = htmlStr2
 
 //answer 3
+
 var htmlStr3 = '';
 function gbp(arr) {
     return arr.filter(item => item.currency_code === "GBP")
 }
 
-var htmlStr1 = `${gbp(items)[0].title} ${gbp(items)[0].price}`
-document.getElementById('answer3').innerHTML = htmlStr1
+var htmlStr3 = `${gbp(items)[0].title} ${gbp(items)[0].price.toFixed(2)}`
+document.getElementById('answer3').innerHTML = htmlStr3
 
 //answer 4
 function woody(arr) {
@@ -40,14 +41,52 @@ function woody(arr) {
     })
 }
 
-
+var htmlStr4 = '';
 (woody(items)).forEach(item => {
-    htmlStr3 += `${item.title} is made of wood\n`
+    htmlStr4 += `${item.title} is made of wood\n`
 })
 
-document.getElementById('answer4').innerHTML = htmlStr3;
+document.getElementById('answer4').innerHTML = htmlStr4;
 
 //answer 5
-function matAmountAboveEight(arr) {
 
+var htmlStr5 = '';
+
+function arrToList(array) {
+    var listStr = ''
+    array.forEach(item => listStr += `${item}\n`)
+    return listStr;
 }
+
+// (function matAmountAboveEight(arr) {
+//     return arr.filter(item => {
+//         if (item.materials.length >= 8) {
+//             return item
+//         }
+//     })
+// }(items).forEach(elem => htmlStr5 += `${elem.title} has ${elem.materials.length} materials:\n${arrToList(elem.materials)}\n`));
+
+function matAmountAboveEight(arr) {
+    return arr.filter(item => {
+        if (item.materials.length >= 8) {
+            return item
+        }
+    })
+}
+
+matAmountAboveEight(items).forEach(elem => htmlStr5 += `${elem.title} has ${elem.materials.length} materials:\n${arrToList(elem.materials)}\n`);
+
+document.getElementById('answer5').innerHTML = htmlStr5;
+
+//answer 6
+
+function whoMade(arr) {
+    return arr.filter(item => {
+        if (item.who_made === 'i_did') {
+            return item;
+        }
+    })
+}
+
+document.getElementById('answer6').innerHTML = `${whoMade(items).length} were made by their sellers`
+
